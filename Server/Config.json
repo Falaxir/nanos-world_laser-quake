@@ -1,0 +1,22 @@
+{
+  "RoundTimeLimitSeconds": 300,
+  "RoundScoreboardEndTimeSeconds": 10,
+  "RespawnTimeSeconds": 3,
+  "InvincibilityTimeSeconds": 1.5,
+  "GlobalSpeedMultiplier": 2.5,
+  "PlayerCharacters": [
+    "nanos-world::SK_Male",
+    "nanos-world::SK_Female"
+  ],
+  "PlayerSpawnLocations": [
+    "-5340.000, 4600.000, 419.000",
+    "-1980.000, 1020.000, 569.000",
+    "-3260.000, -5580.000, 119.000",
+    "3060.000, -8360.000, 419.000",
+    "7520.000, -3600.000, 419.000",
+    "4460.000, 300.000, 119.000",
+    "-3230.000, -1870.000, 119.000",
+    "2100.000, 4340.000, 419.000",
+    "5140.000, -3140.000, 119.000"
+  ]
+}
