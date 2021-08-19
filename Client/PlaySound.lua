@@ -1,3 +1,17 @@
+-- __          ___           _______. _______ .______           ______      __    __       ___       __  ___  _______
+--|  |        /   \         /       ||   ____||   _  \         /  __  \    |  |  |  |     /   \     |  |/  / |   ____|
+--|  |       /  ^  \       |   (----`|  |__   |  |_)  |       |  |  |  |   |  |  |  |    /  ^  \    |  '  /  |  |__
+--|  |      /  /_\  \       \   \    |   __|  |      /        |  |  |  |   |  |  |  |   /  /_\  \   |    <   |   __|
+--|  `----./  _____  \  .----)   |   |  |____ |  |\  \----.   |  `--'  '--.|  `--'  |  /  _____  \  |  .  \  |  |____
+--|_______/__/     \__\ |_______/    |_______|| _| `._____|    \_____\_____\\______/  /__/     \__\ |__|\__\ |_______|
+--
+--.______   ____    ____     _______    ___       __          ___      ___   ___  __  .______
+--|   _  \  \   \  /   /    |   ____|  /   \     |  |        /   \     \  \ /  / |  | |   _  \
+--|  |_)  |  \   \/   /     |  |__    /  ^  \    |  |       /  ^  \     \  V  /  |  | |  |_)  |
+--|   _  <    \_    _/      |   __|  /  /_\  \   |  |      /  /_\  \     >   <   |  | |      /
+--|  |_)  |     |  |        |  |    /  _____  \  |  `----./  _____  \   /  .  \  |  | |  |\  \----.
+--|______/      |__|        |__|   /__/     \__\ |_______/__/     \__\ /__/ \__\ |__| | _| `._____|
+
 function playMusic(name)
     Sound(Vector(), name, true, true, SoundType.Music, 0.4)
 end
@@ -24,6 +38,16 @@ Events.Subscribe("QUAKE_Client_PlayEffect3D", function(music, location)
     if music == nil or location == nil or music == "" or location == "" then return end
     playEffect3D(music, location)
 end)
+
+function PlayQuakeSounds()
+    if QUAKE_CONFIG ~= nil then
+        if QUAKE_KS > QUAKE_CONFIG.KillStreakSoundsNumberMinToPlay then
+            playEffect(QUAKE_CONFIG.QuakeKillStreakSounds[math.random(#QUAKE_CONFIG.QuakeKillStreakSounds)])
+        else
+            playEffect(QUAKE_CONFIG.QuakeRandomSounds[math.random(#QUAKE_CONFIG.QuakeRandomSounds)])
+        end
+    end
+end
 
 Events.Subscribe("QUAKE_Client_PlayAnnouncementSound", function (state, time)
     if state == 1 then

@@ -1,3 +1,17 @@
+-- __          ___           _______. _______ .______           ______      __    __       ___       __  ___  _______
+--|  |        /   \         /       ||   ____||   _  \         /  __  \    |  |  |  |     /   \     |  |/  / |   ____|
+--|  |       /  ^  \       |   (----`|  |__   |  |_)  |       |  |  |  |   |  |  |  |    /  ^  \    |  '  /  |  |__
+--|  |      /  /_\  \       \   \    |   __|  |      /        |  |  |  |   |  |  |  |   /  /_\  \   |    <   |   __|
+--|  `----./  _____  \  .----)   |   |  |____ |  |\  \----.   |  `--'  '--.|  `--'  |  /  _____  \  |  .  \  |  |____
+--|_______/__/     \__\ |_______/    |_______|| _| `._____|    \_____\_____\\______/  /__/     \__\ |__|\__\ |_______|
+--
+--.______   ____    ____     _______    ___       __          ___      ___   ___  __  .______
+--|   _  \  \   \  /   /    |   ____|  /   \     |  |        /   \     \  \ /  / |  | |   _  \
+--|  |_)  |  \   \/   /     |  |__    /  ^  \    |  |       /  ^  \     \  V  /  |  | |  |_)  |
+--|   _  <    \_    _/      |   __|  /  /_\  \   |  |      /  /_\  \     >   <   |  | |      /
+--|  |_)  |     |  |        |  |    /  _____  \  |  `----./  _____  \   /  .  \  |  | |  |\  \----.
+--|______/      |__|        |__|   /__/     \__\ |_______/__/     \__\ /__/ \__\ |__| | _| `._____|
+
 function GetCharacterLookingAt()
     local viewport_2D_center = Render.GetViewportSize() / 2
     local viewport_3D = Render.Deproject(viewport_2D_center)
@@ -16,13 +30,17 @@ function GetCharacterLookingAt()
     -- If hit something and hit an Entity
     if (trace_result.Success and trace_result.Entity) then
         if (NanosUtils.IsA(trace_result.Entity, Character)) then
-            Client.DrawDebugLine(start_location, trace_result.Entity:GetRotation():RotateVector(trace_result.Entity:GetLocation() - trace_result.Location), Color(0, 1, 1), 2, 10)
+            if trace_result.Entity:IsInvulnerable() then
+                return trace_result.Location
+            end
+            --Client.DrawDebugLine(start_location, trace_result.Entity:GetRotation():RotateVector(trace_result.Entity:GetLocation() - trace_result.Location), Color(0, 1, 1), 2, 10)
             return trace_result.Entity
         end
-    else
-        Client.DrawDebugLine(start_location, end_location, Color(0, 1, 1), 2, 10)
+        return trace_result.Location
+    --else
+    --    Client.DrawDebugLine(start_location, end_location, Color(0, 1, 1), 2, 10)
     end
-    return nil
+    return end_location
 end
 
 function GetPositionBlocked()
@@ -46,7 +64,7 @@ function GetPositionBlocked()
     else
         return end_location
     end
-    return end_location
+    return end_location -- THIS IS NOT CORRECT gl to understand why... fucking particles that bend...
 end
 
 function GetCoordinatesLookingAt()

@@ -4,9 +4,34 @@
   "RespawnTimeSeconds": 3,
   "InvincibilityTimeSeconds": 1.5,
   "GlobalSpeedMultiplier": 2.5,
+  "LaserDurationSeconds": 1,
+  "ShootsPerSeconds": 1.5,
+  "KillStreakSoundsNumberMinToPlay": 3,
   "PlayerCharacters": [
     "nanos-world::SK_Male",
     "nanos-world::SK_Female"
+  ],
+  "QuakeRandomSounds": [
+    "laser-quake-assets::holyshit",
+    "laser-quake-assets::godlike",
+    "laser-quake-assets::combowhore",
+    "laser-quake-assets::wickedsick",
+    "laser-quake-assets::unstoppable",
+    "laser-quake-assets::ultrakill",
+    "laser-quake-assets::rampage",
+    "laser-quake-assets::multikill",
+    "laser-quake-assets::teamkiller",
+    "laser-quake-assets::doublekill",
+    "laser-quake-assets::triplekill"
+  ],
+  "QuakeKillStreakSounds": [
+    "laser-quake-assets::dominating",
+    "laser-quake-assets::impressive",
+    "laser-quake-assets::killingspree",
+    "laser-quake-assets::monsterkill",
+    "laser-quake-assets::megakill",
+    "laser-quake-assets::holyshit",
+    "laser-quake-assets::ludicrouskill"
   ],
   "PlayerSpawnLocations": [
     "-5340.000, 4600.000, 419.000",
