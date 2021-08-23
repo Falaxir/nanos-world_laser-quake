@@ -53,7 +53,7 @@ function GetPositionBlocked()
     local end_location = viewport_3D.Position + viewport_3D.Direction * trace_max_distance
 
     -- Determine at which object we will be tracing for (WorldStatic - StaticMeshes - PhysicsBody - Props)
-    local collision_trace = CollisionChannel.WorldStatic
+    local collision_trace = CollisionChannel.WorldStatic | CollisionChannel.WorldDynamic | CollisionChannel.PhysicsBody | CollisionChannel.Vehicle | CollisionChannel.Pawn | CollisionChannel.Mesh
 
     -- Do the Trace
     local trace_result = Client.Trace(start_location, end_location, collision_trace, false, true)

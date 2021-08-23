@@ -26,6 +26,20 @@ Character.Subscribe("Respawn", function(self)
     end, QUAKE_CONFIG.InvincibilityTimeSeconds * 1000, self)
 end)
 
+Events.Subscribe("QUAKE_RocketJump", function(plyr, isLookingWhere)
+    local chara = plyr:GetControlledCharacter()
+    if chara ~= nil and isLookingWhere ~= nil then
+        local control_rotation = chara:GetControlRotation()
+        local forward_vector = control_rotation:GetForwardVector()
+        local invertRotator = Vector(control_rotation.Pitch - 180, control_rotation.Yaw - 180, control_rotation.Roll - 180)
+        Timer.SetTimeout(function(charx, vectory, invert)
+            Particle(charx:GetLocation(), invert:Rotation(), "nanos-world::P_Explosion", true, true)
+            charx:AddImpulse(vectory - (vectory * 2000), true)
+            return false
+        end, 200, chara, forward_vector, invertRotator)
+    end
+end)
+
 Character.Subscribe("Death", function(self, last_damage_taken, last_bone_damage, damage_type_reason, hit_from_direction, instigator)
     local PlayerControlled = self:GetPlayer()
     if PlayerControlled ~= nil then

@@ -6,6 +6,7 @@
   "GlobalSpeedMultiplier": 2.5,
   "LaserDurationSeconds": 1,
   "ShootsPerSeconds": 1.5,
+  "RocketJumpPerSeconds": 0.5,
   "KillStreakSoundsNumberMinToPlay": 3,
   "PlayerCharacters": [
     "nanos-world::SK_Male",

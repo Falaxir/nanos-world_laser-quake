@@ -21,3 +21,37 @@ end)
 Events.Subscribe("QUAKE_Client_GETConfig", function(cfg)
     QUAKE_CONFIG = cfg
 end)
+
+QUAKE_ROCKETJUMP_PRESSED = false
+QUAKE_ROCKETJUMP_ISBEINGPRESSED = false
+
+Client.Subscribe("MouseDown", function(key_name, mouse_x, mouse_y)
+    if key_name == "RightMouseButton" then
+        local posy = GetPositionBlocked()
+        local playerChara = Client.GetLocalPlayer():GetControlledCharacter()
+        if playerChara ~= nil and posy ~= nil then
+            local distance = playerChara:GetLocation():Distance(posy)
+            if distance > 500 then
+                playEffect("nanos-world::A_VR_Negative")
+                return true
+            end
+            QUAKE_ROCKETJUMP_PRESSED = true
+            QUAKE_ROCKETJUMP_ISBEINGPRESSED = true
+            Events.CallRemote("QUAKE_RocketJump", posy)
+            Timer.SetTimeout(function(pos)
+                playEffect3D("nanos-world::A_Explosion_Large", pos)
+                return false
+            end, 200, posy)
+            Timer.SetTimeout(function()
+                QUAKE_ROCKETJUMP_PRESSED = false
+                return false
+            end, QUAKE_CONFIG.RocketJumpPerSeconds * 1000)
+        end
+    end
+end)
+
+Client.Subscribe("MouseUp", function(key_name, mouse_x, mouse_y)
+    if key_name == "RightMouseButton" then
+        QUAKE_ROCKETJUMP_ISBEINGPRESSED = false
+    end
+end)
