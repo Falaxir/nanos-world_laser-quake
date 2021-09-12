@@ -101,7 +101,7 @@ Events.Subscribe("QUAKE_KillBroadcast", function(plyr, PlayerControlled, instiga
 end)
 
 Events.Subscribe("QUAKE_Laser_Shoot", function(plyr, result, plrKilled, weapon)
-    if plyr == nil or result == nil then return end
+    if plyr == nil or result == nil or weapon == nil then return end
     local beam_particle = weapon:GetValue("ParticleLaser")
     if beam_particle:IsValid() then
         if (NanosUtils.IsA(result, Vector)) then
